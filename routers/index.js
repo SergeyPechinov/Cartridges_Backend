@@ -6,7 +6,8 @@ const
     //ALL ROUTES
     routesAuth = require('./auth/'),
     routesCartridges = require('./cartridges'),
-    routesStatuses = require('./statuses');
+    routesStatuses = require('./statuses'),
+		routesWorkers = require('./workers');
 
 router
     //AUTH
@@ -14,6 +15,7 @@ router
 
     //PROTECTED
     .use('/cartridges', passport.authenticate('jwt', {session: false}), routesCartridges)
-    .use('/statuses', passport.authenticate('jwt', {session: false}), routesStatuses);
+    .use('/statuses', passport.authenticate('jwt', {session: false}), routesStatuses)
+    .use('/workers', passport.authenticate('jwt', {session: false}), routesWorkers);
 
 module.exports = router;
