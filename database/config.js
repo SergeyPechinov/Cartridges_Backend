@@ -4,7 +4,7 @@ const config = {
     password: 'root',
     database: 'cartridges',
     port: 5432,
-    ssl: true,
+    ssl: false,
 };
 
 module.exports = {

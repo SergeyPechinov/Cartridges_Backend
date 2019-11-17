@@ -5,7 +5,8 @@ const
 module.exports = async () => {
   const queryStatuses = `\
     SELECT * FROM\
-      ${namesTables.workers};`;
+      ${namesTables.workers}
+    ORDER BY ID DESC\;`;
 
   return await clientDB
       .query(queryStatuses)
