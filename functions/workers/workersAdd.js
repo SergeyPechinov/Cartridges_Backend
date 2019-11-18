@@ -20,7 +20,9 @@ module.exports = (req, res) => {
 			('${workerSurname}', '${workerName}', '${workerPosition}', '${workerCabinet}');`;
 
 		clientDB.query(queryAddWorker, (err, result) => {
-			if (err) { console.log(err) } else {
+			if (err) {
+				console.log(err)
+			} else {
 				console.log('Работник добавлен!');
 				res.status(200).json({
 					success: true,

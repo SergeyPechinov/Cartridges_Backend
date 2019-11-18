@@ -3,11 +3,14 @@ const
     router = express.Router(),
 
     //FUNCTIONS
-    {statusesGet} = require('./../../functions/statuses/index');
+    {statusesGet, statusesAdd} = require('./../../functions/statuses/index');
 
 router
-    .post('/', (req, res) => {
+    .get('/', (req, res) => {
       statusesGet(res);
+    })
+    .post('/', (req, res) => {
+      statusesAdd(req, res);
     });
 
 module.exports = router;
