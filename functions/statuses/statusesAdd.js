@@ -3,7 +3,7 @@ const
 		{namesTables} = require('../../constants/databaseTables');
 
 module.exports = (req, res) => {
-	const nameService = req.body.nameStatus;
+	const nameService = req.body.value;
 
 	if (nameService.length >= 2) {
 		const queryAddService = `\
@@ -15,8 +15,8 @@ module.exports = (req, res) => {
 		clientDB.query(queryAddService, (err, result) => {
 			if (err) {
 				res.status(400).json({
-					message: 'Статус с таким названием уже есть!',
 					success: false,
+					message: 'Статус с таким названием уже есть!',
 				});
 			} else {
 				res.status(200).json({
@@ -26,8 +26,8 @@ module.exports = (req, res) => {
 		});
 	} else {
 		res.status(400).json({
-			message: 'Непредвиденная ошибка!',
 			success: false,
+			message: 'Минимум 2 символа!',
 		});
 	}
 };
