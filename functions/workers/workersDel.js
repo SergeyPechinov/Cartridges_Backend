@@ -13,7 +13,10 @@ module.exports = (req, res) => {
 
 	clientDB.query(queryDelWorker, (err) => {
 		if (err) {
-			console.log(err);
+			res.status(400).json({
+				success: false,
+				message: 'Данный работник где-то учтен, удалить не возоможно. Сначала почистите все связи с ним! Либо это ошибка сервера!',
+			});
 		} else {
 			console.log('Работник удален!');
 			res.status(200).json({

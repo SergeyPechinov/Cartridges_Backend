@@ -3,11 +3,14 @@ const
     router = express.Router(),
 
     //FUNCTIONS
-    {cartridgesGet} = require('./../../functions/cartridges/index');
+    {cartridgesGet, cartridgesAdd} = require('./../../functions/cartridges/index');
 
 router
-    .post('/', (req, res) => {
+    .get('/', (req, res) => {
       cartridgesGet(res);
+    })
+    .post('/', (req, res) => {
+      cartridgesAdd(req, res);
     });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const
 		{clientDB} = require('../../database/client'),
-		{namesTables} = require('../../constants/databaseTables');
+		{namesTables} = require('../../constants/databaseTables'),
+		validateLength = require('./common');
 
 module.exports = (req, res) => {
 	const
@@ -10,7 +11,8 @@ module.exports = (req, res) => {
 			position = req.body.position,
 			cabinet = req.body.cabinet;
 
-	const queryUpdateWorker = `\
+	if (validateLength(surname, name, position, cabinet, res)) {
+		const queryUpdateWorker = `\
 		UPDATE\
 			${namesTables.workers}\
 		SET\
@@ -21,14 +23,18 @@ module.exports = (req, res) => {
 		WHERE\
 			id='${id}';`;
 
-	clientDB.query(queryUpdateWorker, (err) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('Работник обновлен!');
-			res.status(200).json({
-				success: true,
-			});
-		}
-	});
+		clientDB.query(queryUpdateWorker, (err) => {
+			if (err) {
+				res.status(400).json({
+					success: false,
+					message: 'Произошла непредвиденная ошибка!',
+				});
+			} else {
+				console.log('Работник обновлен!');
+				res.status(200).json({
+					success: true,
+				});
+			}
+		});
+	}
 };
